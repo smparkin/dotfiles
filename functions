@@ -1,0 +1,47 @@
+function shownetinfo() {
+	OSTYPE=$(uname -s)
+	IP=""
+	GW=""
+	NET=$(system_profiler SPNetworkDataType | grep "Router:" | cut -c 19-30 | head -1)
+
+	if [ "$OSTYPE" = "Linux" ]; then
+		IP=$(ip address show | grep -E "inet .* brd .* dynamic" | cut -d " " -f6)
+		GW=$(ip route | grep default | cut -d " " -f3)
+	elif [ "$OSTYPE" = "Darwin" ]; then
+		IP=$(ifconfig en0 | grep -v "127.0.0.1" | grep "inet " | head -1 | cut -d " " -f2)
+		if [ "$NET" != "" ]; then
+			GW=$(dig +short myip.opendns.com @resolver1.opendns.com)
+		fi
+	fi
+	tput setaf 7; tput bold; echo -en "Net: "
+        tput sgr0
+	tput setaf 7; echo -en "internal $IP"
+	if [ "$NET" != "" ]; then
+		echo -en ", external $GW"
+		echo -en ", router $NET"
+	fi
+        tput setaf 7
+        tput bold
+	echo -en " | "
+	tput sgr0
+}
+
+function batt() {
+        tput setaf 7; tput bold; echo -en "Bat: "
+        tput sgr0
+        tput setaf 7
+        echo -en $(pmset -g batt | grep -Eo "\d+%" | cut -d% -f1)
+        echo "%"
+        tput sgr0
+}
+
+function lab() {
+        tput setaf 7; tput bold; echo -en "Lab: "
+        tput sgr0
+        tput setaf 7
+        echo -en $(curl -s https://thewhitehat.club/api/v1/status | jq ".data.status" | tr -d "\"")
+        tput setaf 7
+        tput bold
+        echo -en " | "
+        tput sgr0
+}

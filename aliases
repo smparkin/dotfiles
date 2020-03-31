@@ -1,0 +1,48 @@
+# Git
+alias ga='git add *'
+alias gc='git commit -m'
+alias gcl='git clone'
+alias gp='git push'
+alias gs='git status'
+
+# Spotify
+alias snp='python3 ~/Development/SSiTerm/spot.py status'
+alias sap='python3 ~/Development/SSiTerm/spot.py playlist --add'
+alias sls='python3 ~/Development/SSiTerm/spot.py playback --like'
+alias spp='python3 ~/Development/SSiTerm/spot.py playback --play'
+alias sne='python3 ~/Development/SSiTerm/spot.py playback --next'
+alias spr='python3 ~/Development/SSiTerm/spot.py playback --previous'
+alias ssf='python3 ~/Development/SSiTerm/spot.py playback --shuffle'
+alias spd='python3 ~/Development/SSiTerm/spot.py device'
+alias sse='python3 ~/Development/SSiTerm/spot.py search --track'
+alias ssa='python3 ~/Development/SSiTerm/spot.py search --album'
+alias spl='python3 ~/Development/SSiTerm/spot.py playlist --play'
+alias srp='python3 ~/Development/SSiTerm/spot.py playlist --remove'
+alias svl='python3 ~/Development/SSiTerm/spot.py playback --volume'
+alias srl='python3 ~/Development/SSiTerm/spot.py playback --unlike'
+alias ssk='python3 ~/Development/SSiTerm/spot.py playback --seek'
+alias sre='python3 ~/Development/SSiTerm/spot.py playback --repeat'
+
+# ls
+alias lsd="ls -d"
+alias ll='ls -alh'
+
+# System Utils
+alias brewup='cl; brew update; brew upgrade; brew cask upgrade; brew cleanup -s; brew doctor; brew cask doctor | grep -A 1 --color=never "Homebrew Version"'
+alias cl='clear'
+alias sleep="open /System/Library/CoreServices/ScreenSaverEngine.app"
+alias ta="tmux a -t"
+alias tn="tmux new-session -s"
+alias git="hub"
+alias gcc="gcc -g"
+alias hora='date "+%H:%M:%S"'
+alias ap="open /Applications/AirPods.app"
+alias wthr='curl wttr.in/san_luis_obispo'
+alias nf='cl; neofetch; system_profiler SPSoftwareDataType | grep "System Version" | cut -d " " -f9 -f10 -f11| figlet -w 100; shownetinfo && lab && batt'
+
+# School
+alias glp='~/Development/gp.sh'
+alias os="ssh unix3 -t '//home/smparkin/centos/usr/bin/tmux a -t os'"
+alias se="ssh marsonia -t 'tmux a -t se'"
+alias 453='cd /Users/smparkin/Library/Mobile\ Documents/com~apple~CloudDocs/CalPoly/2019-20/Winter20/cpe453'
+alias 308='cd /Users/smparkin/Library/Mobile\ Documents/com~apple~CloudDocs/CalPoly/2019-20/Winter20/csc308'
