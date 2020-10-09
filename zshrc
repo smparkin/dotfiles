@@ -31,11 +31,17 @@ if [ "$OSTYPE" = "Darwin" ]; then
     source ~/.iterm2_shell_integration.zsh
 fi
 
+export DEVKITPRO=/opt/devkitpro
+export DEVKITARM=${DEVKITPRO}/devkitARM
+export DEVKITPPC=${DEVKITPRO}/devkitPPC
+
+export PATH=${DEVKITPRO}/tools/bin:$PATH
+
 export EDITOR="/usr/local/bin/vim"
 export PATH="/usr/local/sbin:$PATH"
 export PATH="/usr/local/opt/openssl/bin:$PATH"
-export CLASSPATH="/Users/smparkin/java/junit-4.12.jar:/Users/smparkin/java/processing-core.jar:${CLASSPATH}"
 export PATH="/usr/local/flutter/bin:$PATH"
+ssh-add -K ~/.ssh/id_rsa 2>/dev/null
 shownetinfo
 lab
 batt

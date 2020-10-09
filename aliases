@@ -22,13 +22,14 @@ alias svl='python3 ~/Development/SSiTerm/spot.py playback --volume'
 alias srl='python3 ~/Development/SSiTerm/spot.py playback --unlike'
 alias ssk='python3 ~/Development/SSiTerm/spot.py playback --seek'
 alias sre='python3 ~/Development/SSiTerm/spot.py playback --repeat'
+alias squ='python3 ~/Development/SSiTerm/spot.py queue'
 
 # ls
 alias lsd="ls -d"
 alias ll='ls -alh'
 
 # System Utils
-alias brewup='cl; brew update; brew upgrade; brew cask upgrade; brew cleanup -s; brew doctor; brew cask doctor | grep -A 1 --color=never "Homebrew Version"'
+alias brewup='cl; brew update; brew upgrade; brew upgrade --cask; brew cleanup -s; brew doctor --verbose | grep -A 1 --color=never "Homebrew Version"'
 alias cl='clear'
 alias sleep="open /System/Library/CoreServices/ScreenSaverEngine.app"
 alias ta="tmux a -t"
@@ -44,5 +45,5 @@ alias nf='cl; neofetch; system_profiler SPSoftwareDataType | grep "System Versio
 alias glp='~/Development/gp.sh'
 alias os="ssh unix3 -t '//home/smparkin/centos/usr/bin/tmux a -t os'"
 alias se="ssh marsonia -t 'tmux a -t se'"
-alias 453='cd /Users/smparkin/Library/Mobile\ Documents/com~apple~CloudDocs/CalPoly/2019-20/Winter20/cpe453'
-alias 308='cd /Users/smparkin/Library/Mobile\ Documents/com~apple~CloudDocs/CalPoly/2019-20/Winter20/csc308'
+alias 429='cd "/Users/smparkin/Library/Mobile Documents/com~apple~CloudDocs/CalPoly/2020-21/Fall20/CSC 429"'
+alias 321='cd "/Users/smparkin/Library/Mobile Documents/com~apple~CloudDocs/CalPoly/2020-21/Fall20/CPE 321"' 
