@@ -43,7 +43,7 @@ export PATH="/usr/local/opt/openssl/bin:$PATH"
 shownetinfo
 lab
 if [ "$OSTYPE" = "Linux" ]; then
-	echo "\n"
+	echo ""
 elif [ "$OSTYPE" = "Darwin" ]; then
         ssh-add -K ~/.ssh/id_rsa 2>/dev/null
         batt
