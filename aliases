@@ -5,25 +5,6 @@ alias gcl='git clone'
 alias gp='git push'
 alias gs='git status'
 
-# Spotify
-alias snp='python3 ~/Development/SSiTerm/spot.py status'
-alias sap='python3 ~/Development/SSiTerm/spot.py playlist --add'
-alias sls='python3 ~/Development/SSiTerm/spot.py playback --like'
-alias spp='python3 ~/Development/SSiTerm/spot.py playback --play'
-alias sne='python3 ~/Development/SSiTerm/spot.py playback --next'
-alias spr='python3 ~/Development/SSiTerm/spot.py playback --previous'
-alias ssf='python3 ~/Development/SSiTerm/spot.py playback --shuffle'
-alias spd='python3 ~/Development/SSiTerm/spot.py device'
-alias sse='python3 ~/Development/SSiTerm/spot.py search --track'
-alias ssa='python3 ~/Development/SSiTerm/spot.py search --album'
-alias spl='python3 ~/Development/SSiTerm/spot.py playlist --play'
-alias srp='python3 ~/Development/SSiTerm/spot.py playlist --remove'
-alias svl='python3 ~/Development/SSiTerm/spot.py playback --volume'
-alias srl='python3 ~/Development/SSiTerm/spot.py playback --unlike'
-alias ssk='python3 ~/Development/SSiTerm/spot.py playback --seek'
-alias sre='python3 ~/Development/SSiTerm/spot.py playback --repeat'
-alias squ='python3 ~/Development/SSiTerm/spot.py queue'
-
 # ls
 alias lsd="ls -d"
 alias ll='ls -alh'
@@ -34,7 +15,6 @@ alias cl='clear'
 alias sleep="open /System/Library/CoreServices/ScreenSaverEngine.app"
 alias ta="tmux a -t"
 alias tn="tmux new-session -s"
-alias git="hub"
 alias gcc="gcc -g"
 alias hora='date "+%H:%M:%S"'
 alias ap="open /Applications/AirPods.app"
