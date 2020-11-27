@@ -28,6 +28,10 @@ function shownetinfo() {
 }
 
 function batt() {
+        tput setaf 7
+        tput bold
+        echo -en " | "
+        tput sgr0
         tput setaf 7; tput bold; echo -en "Bat: "
         tput sgr0
         tput setaf 7
@@ -41,8 +45,5 @@ function lab() {
         tput sgr0
         tput setaf 7
         echo -en $(curl -s https://thewhitehat.club/api/v1/status | jq ".data.status" | tr -d "\"")
-        tput setaf 7
-        tput bold
-        echo -en " | "
         tput sgr0
 }
