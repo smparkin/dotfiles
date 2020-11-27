@@ -5,7 +5,7 @@ function shownetinfo() {
 	NET=""
 
 	if [ "$OSTYPE" = "Linux" ]; then
-		IP=$(ip address show | grep -E "inet .* brd .* dynamic" | cut -d " " -f6)
+		IP=$(ifconfig | grep -v "127.0.0.1" | grep "inet " | head -1 | cut -d " " -f10)
 		GW=$(ip route | grep default | cut -d " " -f3)
 	elif [ "$OSTYPE" = "Darwin" ]; then
 	        NET=$(system_profiler SPNetworkDataType | grep "Router:" | cut -c 19-30 | head -1)
