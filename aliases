@@ -39,7 +39,7 @@ alias gcc="gcc -g"
 alias hora='date "+%H:%M:%S"'
 alias ap="open /Applications/AirPods.app"
 alias wthr='curl wttr.in/san_luis_obispo'
-alias nf='cl; neofetch; system_profiler SPSoftwareDataType | grep "System Version" | cut -d " " -f9 -f10 -f11| figlet -w 100; shownetinfo && lab && batt'
+alias nf='cl; neofetch; neofetch | grep OS | cut -d " " -f2 -f3 -f4 -f5 -f6 | figlet -w 100; shownetinfo && lab && batt'
 
 # School
 alias glp='~/Development/gp.sh'

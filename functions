@@ -9,7 +9,7 @@ function shownetinfo() {
 		GW=$(ip route | grep default | cut -d " " -f3)
 	elif [ "$OSTYPE" = "Darwin" ]; then
 	        NET=$(system_profiler SPNetworkDataType | grep "Router:" | cut -c 19-30 | head -1)
-		IP=$(ifconfig en0 | grep -v "127.0.0.1" | grep "inet " | head -1 | cut -d " " -f2)
+		IP=$(ifconfig | grep -v "127.0.0.1" | grep "inet " | head -1 | cut -d " " -f2)
 		if [ "$NET" != "" ]; then
 			GW=$(dig +short myip.opendns.com @resolver1.opendns.com)
 		fi
