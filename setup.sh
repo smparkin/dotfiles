@@ -5,7 +5,7 @@ OSTYPE=$(uname -s)
 # get package manager up to date
 if [ "$OSTYPE" = "Linux" ]; then
 	sudo apt update
-	sudo apt install fortune cowsay lolcat zsh -y
+	sudo apt install fortune cowsay lolcat zsh net-tools jq -y
 	sudo apt upgrade -y
 elif [ "$OSTYPE" = "Darwin" ]; then
 	echo "Install Homebrew? [y/n]"
