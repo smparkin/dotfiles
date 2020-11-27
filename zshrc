@@ -40,8 +40,11 @@ export PATH=${DEVKITPRO}/tools/bin:$PATH
 export EDITOR="/usr/local/bin/vim"
 export PATH="/usr/local/sbin:$PATH"
 export PATH="/usr/local/opt/openssl/bin:$PATH"
-export PATH="/usr/local/flutter/bin:$PATH"
-ssh-add -K ~/.ssh/id_rsa 2>/dev/null
 shownetinfo
 lab
-batt
+if [ "$OSTYPE" = "Linux" ]; then
+	echo "\n"
+elif [ "$OSTYPE" = "Darwin" ]; then
+        ssh-add -K ~/.ssh/id_rsa 2>/dev/null
+        batt
+fi
