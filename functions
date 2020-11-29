@@ -12,7 +12,7 @@ function shownetinfo() {
 		IP=$(ifconfig | grep -v "127.0.0.1" | grep "inet " | head -1 | cut -d " " -f2)
         fi
 	if [ "$NET" != "" ]; then
-	    GW=$(dig +short myip.opendns.com @resolver1.opendns.com)
+	    GW=$(curl -s icanhazip.com)
 	fi
 	tput setaf 7; tput bold; echo -en "Net: "
         tput sgr0

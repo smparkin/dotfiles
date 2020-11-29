@@ -11,7 +11,7 @@ elif [ "$OSTYPE" = "Darwin" ]; then
 	echo "Install Homebrew? [y/n]"
 	read homebrew
 	if [ "$homebrew" = "y" ]; then
-		/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+		/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
         	brew bundle install --file=Brewfile
 	fi
 fi
