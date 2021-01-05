@@ -21,9 +21,6 @@ function shownetinfo() {
 		echo -en ", external $GW"
 		echo -en ", router $NET"
 	fi
-        tput setaf 7
-        tput bold
-	echo -en " | "
 	tput sgr0
 }
 

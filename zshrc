@@ -41,7 +41,6 @@ export EDITOR="/usr/local/bin/vim"
 export PATH="/usr/local/sbin:$PATH"
 export PATH="/usr/local/opt/openssl/bin:$PATH"
 shownetinfo
-lab
 if [ "$OSTYPE" = "Linux" ]; then
 	echo ""
 elif [ "$OSTYPE" = "Darwin" ]; then
