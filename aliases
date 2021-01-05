@@ -21,6 +21,6 @@ alias wthr='curl wttr.in/san_luis_obispo'
 alias nf='cl; neofetch; neofetch | grep OS | cut -d " " -f2 -f3 -f4 -f5 -f6 | figlet -w 100; shownetinfo && lab && batt'
 
 # School
-alias gp='~/Development/gp.sh'
+alias glp='~/Development/gp.sh'
 alias 429='cd "/Users/smparkin/Library/Mobile Documents/com~apple~CloudDocs/CalPoly/2020-21/Fall20/CSC 429"'
 alias 321='cd "/Users/smparkin/Library/Mobile Documents/com~apple~CloudDocs/CalPoly/2020-21/Fall20/CPE 321"' 
