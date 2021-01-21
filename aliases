@@ -18,9 +18,10 @@ alias tn="tmux new-session -s"
 alias gcc="gcc -g"
 alias hora='date "+%H:%M:%S"'
 alias wthr='curl wttr.in/san_luis_obispo'
-alias nf='cl; neofetch; neofetch | grep OS | cut -d " " -f2 -f3 -f4 -f5 -f6 | figlet -w 100; shownetinfo && lab && batt'
+alias nf='cl; neofetch; shownetinfo && lab && batt'
 
 # School
-alias glp='~/Development/gp.sh'
-alias 429='cd "/Users/smparkin/Library/Mobile Documents/com~apple~CloudDocs/CalPoly/2020-21/Fall20/CSC 429"'
-alias 321='cd "/Users/smparkin/Library/Mobile Documents/com~apple~CloudDocs/CalPoly/2020-21/Fall20/CPE 321"' 
+alias 429='cd /Users/smparkin/Library/Mobile\ Documents/com\~apple\~CloudDocs/CalPoly/2020-21/Winter21/CSC429'
+alias 484='cd /Users/smparkin/Library/Mobile\ Documents/com\~apple\~CloudDocs/CalPoly/2020-21/Winter21/CSC484' 
+alias 402='cd /Users/smparkin/Library/Mobile\ Documents/com\~apple\~CloudDocs/CalPoly/2020-21/Winter21/CSC402'
+alias 217='cd /Users/smparkin/Library/Mobile\ Documents/com\~apple\~CloudDocs/CalPoly/2020-21/Winter21/COMS217'

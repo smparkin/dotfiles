@@ -1,9 +1,9 @@
 # Path to your oh-my-zsh installation.
 OSTYPE=$(uname -s)
 if [ "$OSTYPE" = "Linux" ]; then
-	export ZSH="/home/smparkin/.oh-my-zsh"
+    export ZSH="/home/smparkin/.oh-my-zsh"
 elif [ "$OSTYPE" = "Darwin" ]; then
-	export ZSH="/Users/smparkin/.oh-my-zsh"
+    export ZSH="/Users/smparkin/.oh-my-zsh"
 fi
 
 # Set name of the theme to load
@@ -31,19 +31,19 @@ if [ "$OSTYPE" = "Darwin" ]; then
     source ~/.iterm2_shell_integration.zsh
 fi
 
-export DEVKITPRO=/opt/devkitpro
-export DEVKITARM=${DEVKITPRO}/devkitARM
-export DEVKITPPC=${DEVKITPRO}/devkitPPC
-
-export PATH=${DEVKITPRO}/tools/bin:$PATH
-
 export EDITOR="/usr/local/bin/vim"
-export PATH="/usr/local/sbin:$PATH"
-export PATH="/usr/local/opt/openssl/bin:$PATH"
 shownetinfo
 if [ "$OSTYPE" = "Linux" ]; then
-	echo ""
+    echo ""
 elif [ "$OSTYPE" = "Darwin" ]; then
-        ssh-add -K ~/.ssh/id_rsa 2>/dev/null
-        batt
+    ssh-add -K ~/.ssh/id_rsa 2>/dev/null
+    batt
+fi
+# configure homebrew for arm and x86
+ARCH=$(uname -m)
+if [ "$ARCH" = "arm64" ]; then
+    export PATH="/opt/homebrew/bin:$PATH"
+    export PATH="/opt/homebrew/sbin:$PATH"
+elif [ "$ARCH" = "x86_64" ]; then
+    export PATH="/usr/local/bin:$PATH"
 fi
