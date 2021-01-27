@@ -40,10 +40,12 @@ elif [ "$OSTYPE" = "Darwin" ]; then
     batt
 fi
 # configure homebrew for arm and x86
-ARCH=$(uname -m)
-if [ "$ARCH" = "arm64" ]; then
-    export PATH="/opt/homebrew/bin:$PATH"
-    export PATH="/opt/homebrew/sbin:$PATH"
-elif [ "$ARCH" = "x86_64" ]; then
-    export PATH="/usr/local/bin:$PATH"
+if [ "$OSTYPE" = "Darwin" ]; then
+    ARCH=$(uname -m)
+    if [ "$ARCH" = "arm64" ]; then
+        export PATH="/opt/homebrew/bin:$PATH"
+        export PATH="/opt/homebrew/sbin:$PATH"
+    elif [ "$ARCH" = "x86_64" ]; then
+        export PATH="/usr/local/bin:$PATH"
+    fi
 fi

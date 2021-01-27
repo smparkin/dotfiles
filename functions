@@ -1,46 +1,46 @@
 function shownetinfo() {
-	OSTYPE=$(uname -s)
-	IP=""
-	GW=""
-	NET=""
+    OSTYPE=$(uname -s)
+    IP=""
+    GW=""
+    NET=""
 
-	if [ "$OSTYPE" = "Linux" ]; then
-		IP=$(ifconfig | grep -v "127.0.0.1" | grep "inet " | head -1 | cut -d " " -f10)
-		NET=$(ip route | grep default | cut -d " " -f3)
-	elif [ "$OSTYPE" = "Darwin" ]; then
-	        NET=$(system_profiler SPNetworkDataType | grep "Router:" | cut -c 19-30 | head -1)
-		IP=$(ifconfig | grep -v "127.0.0.1" | grep "inet " | head -1 | cut -d " " -f2)
-        fi
-	if [ "$NET" != "" ]; then
-	    GW=$(curl -s icanhazip.com)
-	fi
-	tput setaf 7; tput bold; echo -en "Net: "
-        tput sgr0
-	tput setaf 7; echo -en "internal $IP"
-	if [ "$NET" != "" ]; then
-		echo -en ", external $GW"
-		echo -en ", router $NET"
-	fi
-	tput sgr0
+    if [ "$OSTYPE" = "Linux" ]; then
+    	IP=$(ip addr show | grep -v "127.0.0.1" | grep "inet " | head -1 | cut -d " " -f6 | cut -d "/" -f1)
+    	NET=$(ip route | grep default | cut -d " " -f3)
+    elif [ "$OSTYPE" = "Darwin" ]; then
+        NET=$(system_profiler SPNetworkDataType | grep "Router:" | cut -c 19-30 | head -1)
+    	IP=$(ifconfig | grep -v "127.0.0.1" | grep "inet " | head -1 | cut -d " " -f2)
+    fi
+    if [ "$NET" != "" ]; then
+        GW=$(curl -s icanhazip.com)
+    fi
+    tput setaf 7; tput bold; echo -en "Net: "
+    tput sgr0
+    tput setaf 7; echo -en "internal $IP"
+    if [ "$NET" != "" ]; then
+    	echo -en ", external $GW"
+    	echo -en ", router $NET"
+    fi
+    tput sgr0
 }
 
 function batt() {
-        tput setaf 7
-        tput bold
-        echo -en " | "
-        tput sgr0
-        tput setaf 7; tput bold; echo -en "Bat: "
-        tput sgr0
-        tput setaf 7
-        echo -en $(pmset -g batt | grep -Eo "\d+%" | cut -d% -f1)
-        echo "%"
-        tput sgr0
+    tput setaf 7
+    tput bold
+    echo -en " | "
+    tput sgr0
+    tput setaf 7; tput bold; echo -en "Bat: "
+    tput sgr0
+    tput setaf 7
+    echo -en $(pmset -g batt | grep -Eo "\d+%" | cut -d% -f1)
+    echo "%"
+    tput sgr0
 }
 
 function lab() {
-        tput setaf 7; tput bold; echo -en "Lab: "
-        tput sgr0
-        tput setaf 7
-        echo -en $(curl -s https://thewhitehat.club/api/v1/status | jq ".data.status" | tr -d "\"")
-        tput sgr0
+    tput setaf 7; tput bold; echo -en "Lab: "
+    tput sgr0
+    tput setaf 7
+    echo -en $(curl -s https://thewhitehat.club/api/v1/status | jq ".data.status" | tr -d "\"")
+    tput sgr0
 }

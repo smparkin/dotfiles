@@ -19,6 +19,7 @@ alias gcc="gcc -g"
 alias hora='date "+%H:%M:%S"'
 alias wthr='curl wttr.in/san_luis_obispo'
 alias nf='cl; neofetch; shownetinfo && lab && batt'
+alias servers='python3 /Users/smparkin/Development/server_stats/servers.py'
 
 # School
 alias 429='cd /Users/smparkin/Library/Mobile\ Documents/com\~apple\~CloudDocs/CalPoly/2020-21/Winter21/CSC429'
