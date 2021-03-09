@@ -1,25 +1,28 @@
 function shownetinfo() {
     OSTYPE=$(uname -s)
-    IP=""
-    GW=""
-    NET=""
+    LANIP=""
+    WANIP=""
+    ROUTR=""
 
     if [ "$OSTYPE" = "Linux" ]; then
-    	IP=$(ip addr show | grep -v "127.0.0.1" | grep "inet " | head -1 | cut -d " " -f6 | cut -d "/" -f1)
-    	NET=$(ip route | grep default | cut -d " " -f3)
+    	LANIP=$(ip addr show | grep -v "127.0.0.1" | grep "inet " | head -1 | cut -d " " -f6 | cut -d "/" -f1)
+    	ROUTR=$(ip route | grep default | cut -d " " -f3)
+        if [ "$ROUTR" != "" ]; then
+            WANIP=$(timeout 0.25s curl -s ipv4.icanhazip.com)
+        fi
     elif [ "$OSTYPE" = "Darwin" ]; then
-        NET=$(system_profiler SPNetworkDataType | grep "Router:" | cut -c 19-30 | head -1)
-    	IP=$(ifconfig | grep -v "127.0.0.1" | grep "inet " | head -1 | cut -d " " -f2)
-    fi
-    if [ "$NET" != "" ]; then
-        GW=$(curl -s icanhazip.com)
+        ROUTR=$(system_profiler SPNetworkDataType | grep "Router:" | cut -c 19-30 | head -1)
+    	LANIP=$(ifconfig | grep -v "127.0.0.1" | grep "inet " | head -1 | cut -d " " -f2)
+        if [ "$ROUTR" != "" ]; then
+            WANIP=$(gtimeout 0.25s curl -s ipv4.icanhazip.com)
+        fi
     fi
     tput setaf 7; tput bold; echo -en "Net: "
     tput sgr0
-    tput setaf 7; echo -en "internal $IP"
-    if [ "$NET" != "" ]; then
-    	echo -en ", external $GW"
-    	echo -en ", router $NET"
+    tput setaf 7; echo -en "internal $LANIP"
+    if [ "$ROUTR" != "" ]; then
+    	echo -en ", external $WANIP"
+    	echo -en ", router $ROUTR"
     fi
     tput sgr0
 }

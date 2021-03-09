@@ -45,7 +45,9 @@ if [ "$OSTYPE" = "Darwin" ]; then
     if [ "$ARCH" = "arm64" ]; then
         export PATH="/opt/homebrew/bin:$PATH"
         export PATH="/opt/homebrew/sbin:$PATH"
+        export PATH="/Users/smparkin/Library/Python/3.9/bin:$PATH"
     elif [ "$ARCH" = "x86_64" ]; then
         export PATH="/usr/local/bin:$PATH"
+        export PATH="/usr/local/sbin:$PATH"
     fi
 fi
