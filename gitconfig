@@ -4,7 +4,7 @@
 	process = git-lfs filter-process
 	required = true
 [user]
-	name = Stephen
+	name = Stephen Parkinson
 	email = smparkin@calpoly.edu
 [core]
 	excludesfile = ~/.gitignore_global

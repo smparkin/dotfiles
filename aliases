@@ -22,7 +22,4 @@ alias nf='cl; neofetch; shownetinfo && batt'
 alias servers='python3 /Users/smparkin/Development/server_stats/servers.py'
 
 # School
-alias 429='cd /Users/smparkin/Library/Mobile\ Documents/com\~apple\~CloudDocs/CalPoly/2020-21/Winter21/CSC429'
-alias 484='cd /Users/smparkin/Library/Mobile\ Documents/com\~apple\~CloudDocs/CalPoly/2020-21/Winter21/CSC484' 
-alias 402='cd /Users/smparkin/Library/Mobile\ Documents/com\~apple\~CloudDocs/CalPoly/2020-21/Winter21/CSC402'
-alias 217='cd /Users/smparkin/Library/Mobile\ Documents/com\~apple\~CloudDocs/CalPoly/2020-21/Winter21/COMS217'
+alias 305='cd /Users/smparkin/Library/Mobile\ Documents/com\~apple\~CloudDocs/CalPoly/2020-21/Spring21/CSC305'
