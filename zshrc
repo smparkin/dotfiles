@@ -51,3 +51,6 @@ if [ "$OSTYPE" = "Darwin" ]; then
         export PATH="/usr/local/sbin:$PATH"
     fi
 fi
+export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
+export DEVKITPRO="/opt/devkitpro"
+export DEVKITARM="/opt/devkitpro/devkitARM"

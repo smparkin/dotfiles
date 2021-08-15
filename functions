@@ -14,7 +14,7 @@ function shownetinfo() {
         ROUTR=$(system_profiler SPNetworkDataType | grep "Router:" | cut -c 19-30 | head -1)
     	LANIP=$(ifconfig | grep -v "127.0.0.1" | grep "inet " | head -1 | cut -d " " -f2)
         if [ "$ROUTR" != "" ]; then
-            WANIP=$(gtimeout 0.25s curl -s ipv4.icanhazip.com)
+            WANIP=$(gtimeout 0.25s curl -s icanhazip.com)
         fi
     fi
     tput setaf 7; tput bold; echo -en "Net: "
