@@ -6,21 +6,16 @@ alias gp='git push'
 alias gs='git status'
 
 # ls
-alias lsd="ls -d"
 alias ll='ls -alh'
 
 # System Utils
 alias brewup='cl; brew update; brew upgrade; brew upgrade --cask; brew cleanup -s; brew doctor --verbose | grep -A 1 --color=never "Homebrew Version"'
 alias cl='clear'
-alias sleep="open /System/Library/CoreServices/ScreenSaverEngine.app"
 alias ta="tmux a -t"
 alias tn="tmux new-session -s"
 alias gcc="gcc -g"
-alias hora='date "+%H:%M:%S"'
 alias wthr='curl wttr.in/san_luis_obispo'
 alias nf='cl; neofetch; shownetinfo && batt'
 alias servers='python3 /Users/smparkin/Development/server_stats/servers.py'
 alias hekate='python3 /Users/smparkin/Development/fusee-launcher/fusee-launcher.py /Users/smparkin/Development/fusee-launcher/hekate/hekate.bin'
-
-# School
-alias 305='cd /Users/smparkin/Library/Mobile\ Documents/com\~apple\~CloudDocs/CalPoly/2020-21/Spring21/CSC305'
+alias src='omz reload'

@@ -44,3 +44,4 @@ launch.json
 settings.json
 sftp.json
 .coverage
+secrets
