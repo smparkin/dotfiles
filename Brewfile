@@ -1,4 +1,3 @@
-tap "adoptopenjdk/openjdk"
 tap "homebrew/bundle"
 tap "homebrew/cask"
 tap "homebrew/cask-drivers"
@@ -38,7 +37,7 @@ brew "imagemagick"
 brew "jq"
 brew "ldid"
 brew "libusbmuxd"
-brew "libimobiledevice", args: ["HEAD"]
+brew "libimobiledevice"
 brew "llvm"
 brew "lolcat"
 brew "ruby"
@@ -63,7 +62,7 @@ brew "zsh-completions"
 brew "zsh-history-substring-search"
 brew "zsh-syntax-highlighting"
 brew "zzz"
-cask "adoptopenjdk8"
+cask "openjdk"
 cask "appcleaner"
 cask "burp-suite"
 cask "chromedriver"
@@ -92,7 +91,6 @@ cask "vmware-fusion"
 cask "wireshark"
 cask "xquartz"
 cask "zoom"
-mas "1Blocker", id: 1107421413
 mas "Dark Reader for Safari", id: 1438243180
 mas "Keynote", id: 409183694
 mas "Microsoft Excel", id: 462058435
