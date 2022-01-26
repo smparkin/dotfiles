@@ -43,10 +43,12 @@ if [ "$OSTYPE" = "Darwin" ]; then
     elif [ "$ARCH" = "x86_64" ]; then
         export PATH="/usr/local/bin:$PATH"
         export PATH="/usr/local/sbin:$PATH"
+        export PATH="/opt/devkitpro/pacman/bin:$PATH"
     fi
 fi
 export DEVKITPRO="/opt/devkitpro"
 export DEVKITARM="/opt/devkitpro/devkitARM"
+export DEVKITPPC="/opt/devkitpro/devkitPPC"
 
 shownetinfo
 if [ "$OSTYPE" = "Linux" ]; then
