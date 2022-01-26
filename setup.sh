@@ -2,10 +2,11 @@
 
 OSTYPE=$(uname -s)
 
-# get package manager up to date
+# assume were on ubuntu because thats reasonable
+# and get package manager up to date
 if [ "$OSTYPE" = "Linux" ]; then
 	sudo apt update
-	sudo apt install coreutils zsh net-tools jq -y
+	sudo apt install coreutils zsh net-tools jq python3-pip -y
 	sudo apt upgrade -y
 elif [ "$OSTYPE" = "Darwin" ]; then
 	echo "Install Homebrew? [y/n]"
@@ -15,6 +16,9 @@ elif [ "$OSTYPE" = "Darwin" ]; then
         	brew bundle install --file=Brewfile
 	fi
 fi
+
+# silence login message
+touch .hushlogin
 
 # get ohmyzsh setup
 git clone https://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh/

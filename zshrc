@@ -30,17 +30,18 @@ if [ "$OSTYPE" = "Darwin" ]; then
     source ~/.iterm2_shell_integration.zsh
 fi
 
-export EDITOR="/opt/homebrew/bin/vim"
 # configure homebrew for arm and x86
 if [ "$OSTYPE" = "Darwin" ]; then
     ARCH=$(uname -m)
     if [ "$ARCH" = "arm64" ]; then
+        export EDITOR="/opt/homebrew/bin/vim"
         export PATH="/opt/homebrew/bin:$PATH"
         export PATH="/opt/homebrew/sbin:$PATH"
         export PATH="/Users/smparkin/Library/Python/3.9/bin:$PATH"
         export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
         export PATH="/Users/smparkin/Library/Python/2.7/bin:$PATH"
     elif [ "$ARCH" = "x86_64" ]; then
+        export EDITOR="/usr/local/bin/vim"
         export PATH="/usr/local/bin:$PATH"
         export PATH="/usr/local/sbin:$PATH"
         export PATH="/opt/devkitpro/pacman/bin:$PATH"
