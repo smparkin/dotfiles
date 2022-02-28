@@ -2,19 +2,24 @@
 
 OSTYPE=$(uname -s)
 
-# assume were on ubuntu because thats reasonable
-# and get package manager up to date
 if [ "$OSTYPE" = "Linux" ]; then
-	sudo apt update
-	sudo apt install coreutils zsh net-tools jq python3-pip -y
-	sudo apt upgrade -y
+    DISTRO=$(lsb_release -i -s)
+    if [ "$DISTRO" = "Ubuntu" ]; then
+        sudo apt update
+        sudo apt install coreutils vim zsh jq python3 python3-pip -y
+        sudo apt upgrade -y
+    else
+        # pretty safe assumption that if not ubuntu were on arch
+        sudo pacman -Syu
+        sudo pacman -Sy coreutils vim zsh jq python3
+    fi
 elif [ "$OSTYPE" = "Darwin" ]; then
-	echo "Install Homebrew? [y/n]"
-	read homebrew
-	if [ "$homebrew" = "y" ]; then
-		/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-        	brew bundle install --file=Brewfile
-	fi
+    echo "Install Homebrew? [y/n]"
+    read homebrew
+    if [ "$homebrew" = "y" ]; then
+	/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+        brew bundle install --file=Brewfile
+    fi
 fi
 
 # silence login message
@@ -23,7 +28,8 @@ touch .hushlogin
 # get ohmyzsh setup
 git clone https://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh/
 
-# symlink files
+# remove common files and symlink new files
+rm ~/.zshrc ~/.vimrc ~/.tmux.conf
 mkdir ~/.zsh.d
 ln -s ~/dotfiles/aliases ~/.zsh.d/aliases
 ln -s ~/dotfiles/functions ~/.zsh.d/functions
@@ -35,14 +41,10 @@ ln -s ~/dotfiles/tmux.conf ~/.tmux.conf
 ln -s ~/dotfiles/vimrc ~/.vimrc
 
 mkdir ~/Development
-git clone https://github.com/smparkin/SpotifyCLI.git ~/Development/SSiTerm
-cd ~/Development/SSiTerm
-pip3 install -r requirements.txt
-cd ~/
 
 echo "Change shell to zsh? [y/n]"
 read shell
 if [ "$shell" = "y" ]; then
-	chsh -s /bin/zsh
+    chsh -s /bin/zsh
 fi
 exit
