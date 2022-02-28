@@ -44,6 +44,6 @@ function lab() {
     tput setaf 7; tput bold; echo -en "Lab: "
     tput sgr0
     tput setaf 7
-    echo -en $(curl -s https://cpsecurity.club/api/v1/status | jq ".data.status" | tr -d "\"")
+    echo $(curl -s https://cpsecurity.club/api/v1/status | jq ".data.status" | tr -d "\"")
     tput sgr0
 }

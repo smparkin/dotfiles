@@ -56,5 +56,8 @@ if [ "$OSTYPE" = "Linux" ]; then
     echo ""
 elif [ "$OSTYPE" = "Darwin" ]; then
     ssh-add -K ~/.ssh/id_rsa 2>/dev/null
-    batt
+    LAPTOP=$(system_profiler SPHardwareDataType | grep "Model Name" | grep "Book")
+    if [ "$LAPTOP" != "" ]; then
+        batt
+    fi
 fi
