@@ -44,9 +44,9 @@ if [ "$OSTYPE" = "Darwin" ]; then
         export EDITOR="/usr/local/bin/vim"
         export PATH="/usr/local/bin:$PATH"
         export PATH="/usr/local/sbin:$PATH"
-        export PATH="/opt/devkitpro/pacman/bin:$PATH"
     fi
 fi
+export PATH="/opt/devkitpro/pacman/bin:$PATH"
 export DEVKITPRO="/opt/devkitpro"
 export DEVKITARM="/opt/devkitpro/devkitARM"
 export DEVKITPPC="/opt/devkitpro/devkitPPC"

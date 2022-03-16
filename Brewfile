@@ -18,18 +18,19 @@ brew "python@3.9"
 brew "pkg-config"
 brew "cmake"
 brew "cmatrix"
+brew "ruby"
 brew "cocoapods"
 brew "coreutils"
 brew "gnu-tar"
 brew "dpkg"
 brew "elinks"
 brew "exiftool"
+brew "harfbuzz"
 brew "sdl2"
 brew "ffmpeg"
 brew "figlet"
 brew "fortune"
 brew "gcc"
-brew "gdb"
 brew "git"
 brew "gnu-sed"
 brew "go"
@@ -43,7 +44,6 @@ brew "libimobiledevice"
 brew "librsvg"
 brew "llvm"
 brew "lolcat"
-brew "ruby"
 brew "macvim"
 brew "mas"
 brew "nasm"
@@ -71,45 +71,44 @@ brew "zsh-completions"
 brew "zsh-history-substring-search"
 brew "zsh-syntax-highlighting"
 brew "zzz"
-cask "adoptopenjdk"
 cask "alacritty"
 cask "android-platform-tools"
 cask "appcleaner"
-cask "burp-suite"
-cask "cinebench"
 cask "daisydisk"
-cask "discord"
-cask "dolphin"
+cask "discord-canary"
+cask "displaylink"
+cask "displaylink-login-extension"
+cask "dolphin-dev"
 cask "firefox"
 cask "font-fira-code"
 cask "handbrake"
 cask "hex-fiend"
 cask "iina"
-cask "iterm2"
+cask "makemkv"
 cask "melonds"
-cask "minecraft"
-cask "mpv"
-cask "openemu"
-cask "plex"
 cask "qbittorrent"
 cask "rectangle"
 cask "slack"
 cask "steam"
 cask "visual-studio-code"
 cask "vlc"
-cask "wireshark"
 cask "xquartz"
 cask "zoom"
 mas "1Password 7", id: 1333542190
+mas "Dark Noise", id: 1465439395
 mas "Dark Reader for Safari", id: 1438243180
-mas "Deliveries", id: 924726344
+mas "DaVinci Resolve", id: 571213070
+mas "Deliveries", id: 290986013
+mas "Developer", id: 640199958
+mas "Flighty", id: 1358823008
 mas "Jump Desktop", id: 524141863
 mas "Keynote", id: 409183694
 mas "Notability", id: 360593530
 mas "Pages", id: 409201541
 mas "Paste", id: 967805235
-mas "Tampermonkey", id: 1482490089
+mas "TestFlight", id: 899247664
 mas "The Unarchiver", id: 425424353
+mas "Tripsy", id: 1429967544
 mas "Wipr", id: 1320666476
 mas "Xcode", id: 497799835
 mas "Yoink", id: 457622435
