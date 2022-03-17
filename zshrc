@@ -37,15 +37,15 @@ if [ "$OSTYPE" = "Darwin" ]; then
         export EDITOR="/opt/homebrew/bin/vim"
         export PATH="/opt/homebrew/bin:$PATH"
         export PATH="/opt/homebrew/sbin:$PATH"
-        export PATH="/Users/smparkin/Library/Python/3.9/bin:$PATH"
         export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
-        export PATH="/Users/smparkin/Library/Python/2.7/bin:$PATH"
     elif [ "$ARCH" = "x86_64" ]; then
         export EDITOR="/usr/local/bin/vim"
         export PATH="/usr/local/bin:$PATH"
         export PATH="/usr/local/sbin:$PATH"
     fi
 fi
+export PATH="/Users/smparkin/Library/Python/2.7/bin:$PATH"
+export PATH="/Users/smparkin/Library/Python/3.9/bin:$PATH"
 export PATH="/opt/devkitpro/pacman/bin:$PATH"
 export DEVKITPRO="/opt/devkitpro"
 export DEVKITARM="/opt/devkitpro/devkitARM"
@@ -59,5 +59,7 @@ elif [ "$OSTYPE" = "Darwin" ]; then
     LAPTOP=$(system_profiler SPHardwareDataType | grep "Model Name" | grep "Book")
     if [ "$LAPTOP" != "" ]; then
         batt
+    else
+        echo ""
     fi
 fi

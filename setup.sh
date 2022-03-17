@@ -9,7 +9,7 @@ if [ "$OSTYPE" = "Linux" ]; then
         sudo apt install coreutils vim zsh jq python3 python3-pip -y
         sudo apt upgrade -y
     else
-        # pretty safe assumption that if not ubuntu were on arch
+        # pretty safe assumption that if not ubuntu its arch
         sudo pacman -Syu
         sudo pacman -Sy coreutils vim zsh jq python3
     fi
@@ -18,12 +18,18 @@ elif [ "$OSTYPE" = "Darwin" ]; then
     read homebrew
     if [ "$homebrew" = "y" ]; then
 	/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-        brew bundle install --file=Brewfile
+        echo "Restore from Brewfile? [y/n]"
+        read bundle
+        if [ "$bundle" = "y" ]; then
+            brew bundle install --file=Brewfile
+        else
+            brew install coreutils neofetch vim zsh jq python3
+        fi
     fi
 fi
 
 # silence login message
-touch .hushlogin
+touch ~/.hushlogin
 
 # get ohmyzsh setup
 git clone https://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh/

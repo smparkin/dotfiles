@@ -1,6 +1,4 @@
 # Git
-alias ga='git add *'
-alias gc='git commit -m'
 alias gcl='git clone'
 alias gp='git push'
 alias gs='git status'
@@ -16,7 +14,6 @@ alias tn="tmux new-session -s"
 alias gcc="gcc -g"
 alias wthr='curl wttr.in/san_luis_obispo'
 alias nf='cl; neofetch; shownetinfo && batt'
-alias servers='python3 /Users/smparkin/Development/server_stats/servers.py'
 alias hekate='python3 /Users/smparkin/Development/fusee-launcher/fusee-launcher.py /Users/smparkin/Development/fusee-launcher/hekate/hekate.bin'
 alias src='omz reload'
 
