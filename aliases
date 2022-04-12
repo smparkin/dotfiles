@@ -7,13 +7,13 @@ alias gs='git status'
 alias ll='ls -alh'
 
 # System Utils
-alias brewup='cl; brew update; brew upgrade; brew upgrade --cask; brew cleanup -s; brew doctor --verbose | grep -A 1 --color=never "Homebrew Version"'
+alias brewup='cl && brew update && brew upgrade && brew upgrade --cask && brew cleanup -s && brew doctor --verbose | grep -A 1 --color=never "Homebrew Version" && brew autoremove'
 alias cl='clear'
 alias ta="tmux a -t"
 alias tn="tmux new-session -s"
 alias gcc="gcc -g"
 alias wthr='curl wttr.in/san_luis_obispo'
-alias nf='cl; neofetch; shownetinfo && batt'
+alias nf='cl && neofetch && shownetinfo && batt'
 alias hekate='python3 /Users/smparkin/Development/fusee-launcher/fusee-launcher.py /Users/smparkin/Development/fusee-launcher/hekate/hekate.bin'
 alias src='omz reload'
 
