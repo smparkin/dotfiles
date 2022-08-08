@@ -46,7 +46,7 @@ ln -s ~/dotfiles/newstephen.zsh-theme ~/.oh-my-zsh/custom/themes/newstephen.zsh-
 ln -s ~/dotfiles/tmux.conf ~/.tmux.conf
 ln -s ~/dotfiles/vimrc ~/.vimrc
 
-mkdir ~/Development
+mkdir ~/Developer
 
 echo "Change shell to zsh? [y/n]"
 read shell

@@ -47,3 +47,4 @@ function lab() {
     echo $(curl -s https://cpsecurity.club/api/v1/status | jq ".data.status" | tr -d "\"")
     tput sgr0
 }
+
