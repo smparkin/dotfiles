@@ -11,7 +11,7 @@
   outputs = inputs@{ self, nix-darwin, nixpkgs, nix-homebrew }:
   let
     configuration = { pkgs, config, ... }: {
-      
+
       nixpkgs.config.allowUnfree = true;
 
       # List packages installed in system profile. To search by name, run:
@@ -36,7 +36,7 @@
             pkgs.rectangle
             pkgs.vscode
         ];
-      
+
       homebrew = {
         enable = true;
         casks = [
@@ -75,6 +75,8 @@
           "WireGuard" = 1451685025;
         };
         onActivation.cleanup = "zap";
+        onActivation.autoUpdate = true;
+        onActivation.upgrade = true;
       };
 
       # Auto upgrade nix package and the daemon service.
@@ -103,6 +105,12 @@
             ${pkgs.mkalias}/bin/mkalias "$src" "/Applications/Nix Apps/$app_name"
           done
         '';
+
+      system.defaults = {
+        dock.autohide = true;
+        trackpad.Clicking = true;
+        trackpad.TrackpadThreeFingerDrag = true;
+      };
 
       # Set Git commit hash for darwin-version.
       system.configurationRevision = self.rev or self.dirtyRev or null;
