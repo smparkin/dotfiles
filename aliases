@@ -16,9 +16,12 @@ alias wthr='curl wttr.in/san_luis_obispo'
 alias nf='cl && neofetch && shownetinfo && batt'
 alias hekate='python3 /Users/smparkin/Development/fusee-launcher/fusee-launcher.py /Users/smparkin/Development/fusee-launcher/hekate/hekate.bin'
 alias src='omz reload'
+alias python='python3'
 
 # Music
-alias amp='python3 ~/Development/abandoned/SSiTerm/music.py play'
-alias amn='python3 ~/Development/abandoned/SSiTerm/music.py next'
-alias amr='python3 ~/Development/abandoned/SSiTerm/music.py prev'
-alias amv='python3 ~/Development/abandoned/SSiTerm/music.py playback --volume '
+alias amp='python3 ~/Developer/abandoned/SSiTerm/music.py play'
+alias amn='python3 ~/Developer/abandoned/SSiTerm/music.py next'
+alias amr='python3 ~/Developer/abandoned/SSiTerm/music.py prev'
+alias amv='python3 ~/Developer/abandoned/SSiTerm/music.py playback --volume '
+
+alias fps='[[ $(launchctl getenv MTL_HUD_ENABLED) -eq 1 ]]&&launchctl unsetenv MTL_HUD_ENABLED||launchctl setenv MTL_HUD_ENABLED 1'
