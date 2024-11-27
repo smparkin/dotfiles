@@ -20,59 +20,58 @@
         [
             pkgs.fastfetch
             pkgs.coreutils
-            pkgs.mkalias
             pkgs.openjdk17
             pkgs.openjdk21
-            pkgs.appcleaner
-            pkgs.discord
-            pkgs.docker
-            pkgs.iina
-            pkgs.iterm2
-            pkgs.obsidian
-            pkgs.ollama
-            pkgs.openscad
-            pkgs.prismlauncher
-            pkgs.qbittorrent
-            pkgs.rectangle
-            pkgs.vscode
         ];
 
       homebrew = {
         enable = true;
         casks = [
-          "alfred"
+          "appcleaner"
           "balenaetcher"
           "bambu-studio"
           "daisydisk"
+          "discord"
+          "docker"
           "firefox"
           "font-sf-mono"
+          "iina"
           "istat-menus"
+          "iterm2"
+          "obsidian"
+          "ollama"
+          "prismlauncher"
           "protonvpn"
+          "qbittorrent"
           "raspberry-pi-imager"
+          "raycast"
+          "rectangle"
           "scroll-reverser"
           "sf-symbols"
           "steam"
+          "visual-studio-code"
         ];
         brews = [
-          "asitop"
-          "bpytop"
           "mas"
         ];
         masApps = {
           "Broadcasts" = 1469995354;
           "Callsheet" = 1672356376;
           "Developer" = 640199958;
+          "Flighty" = 1358823008;
           "Infuse" = 1136220934;
           "Noir" = 1592917505;
+          "Numbers" = 409203825;
           "Overcast" = 888422857;
+          "Pages" = 409201541;
           "SponsorBlock" = 1573461917;
           "TestFlight" = 899247664;
           "TheUnarchiver" = 425424353;
           "Unread" = 1363637349;
           "WiFiMan" = 1385561119;
           "Wipr" = 1320666476;
-          "Xcode" = 497799835;
           "WireGuard" = 1451685025;
+          "Xcode" = 497799835;
         };
         onActivation.cleanup = "zap";
         onActivation.autoUpdate = true;
@@ -85,26 +84,6 @@
 
       # Necessary for using flakes on this system.
       nix.settings.experimental-features = "nix-command flakes";
-
-      system.activationScripts.applications.text = let
-        env = pkgs.buildEnv {
-          name = "system-applications";
-          paths = config.environment.systemPackages;
-          pathsToLink = "/Applications";
-        };
-      in
-        pkgs.lib.mkForce ''
-          # Set up applications.
-          echo "setting up /Applications..." >&2
-          rm -rf /Applications/Nix\ Apps
-          mkdir -p /Applications/Nix\ Apps
-          find ${env}/Applications -maxdepth 1 -type l -exec readlink '{}' + |
-          while read -r src; do
-            app_name=$(basename "$src")
-            echo "copying $src" >&2
-            ${pkgs.mkalias}/bin/mkalias "$src" "/Applications/Nix Apps/$app_name"
-          done
-        '';
 
       system.defaults = {
         dock.autohide = true;
