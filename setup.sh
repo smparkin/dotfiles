@@ -14,37 +14,17 @@ if [ "$OSTYPE" = "Linux" ]; then
         sudo pacman -Sy coreutils vim zsh jq python3
     fi
 elif [ "$OSTYPE" = "Darwin" ]; then
-    echo "Install Homebrew? [y/n]"
-    read homebrew
-    if [ "$homebrew" = "y" ]; then
-	/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-        echo "Restore from Brewfile? [y/n]"
-        read bundle
-        if [ "$bundle" = "y" ]; then
-            brew bundle install --file=Brewfile
-        else
-            brew install coreutils neofetch vim zsh jq python3
-        fi
-    fi
+    echo "Install Nix? [y/n]"
+    read install_nix
+    if [ "$install_nix" = "y" ]; then
+	sh <(curl -L https://nixos.org/nix/install)
 fi
 
 # silence login message
 touch ~/.hushlogin
 
-# get ohmyzsh setup
-git clone https://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh/
-
 # remove common files and symlink new files
 rm ~/.zshrc ~/.vimrc ~/.tmux.conf
-mkdir ~/.zsh.d
-ln -s ~/dotfiles/aliases ~/.zsh.d/aliases
-ln -s ~/dotfiles/functions ~/.zsh.d/functions
-ln -s ~/dotfiles/zshrc ~/.zshrc
-ln -s ~/dotfiles/gitconfig ~/.gitconfig
-ln -s ~/dotfiles/gitignore_global ~/.gitignore_global
-ln -s ~/dotfiles/newstephen.zsh-theme ~/.oh-my-zsh/custom/themes/newstephen.zsh-theme
-ln -s ~/dotfiles/tmux.conf ~/.tmux.conf
-ln -s ~/dotfiles/vimrc ~/.vimrc
 
 mkdir ~/Developer
 

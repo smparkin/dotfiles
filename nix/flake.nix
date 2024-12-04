@@ -114,7 +114,10 @@
       programs.zsh.enable = true;
       
       # Home Manager
-      users.users.smparkin.home = "/Users/smparkin";
+      users.users = {
+        smparkin.home = "/Users/smparkin";
+        parkist.home = "/Users/parkist";
+      };
       nix.configureBuildUsers = true;
       nix.useDaemon = true;
     };
