@@ -6,9 +6,11 @@
     nix-darwin.url = "github:LnL7/nix-darwin";
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
     nix-homebrew.url = "github:zhaofengli-wip/nix-homebrew";
+    home-manager.url = "github:nix-community/home-manager";
+    home-manager.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = inputs@{ self, nix-darwin, nixpkgs, nix-homebrew }:
+  outputs = inputs@{ self, nix-darwin, nixpkgs, nix-homebrew, home-manager }:
   let
     configuration = { pkgs, config, ... }: {
 
@@ -20,8 +22,14 @@
         [
             pkgs.fastfetch
             pkgs.coreutils
+            pkgs.nmap
             pkgs.openjdk17
             pkgs.openjdk21
+            pkgs.tree
+            pkgs.zstd
+            # zsh plugins
+            pkgs.zsh-autosuggestions
+            pkgs.zsh-syntax-highlighting
         ];
 
       homebrew = {
@@ -49,6 +57,7 @@
           "scroll-reverser"
           "sf-symbols"
           "steam"
+          "utm"
           "visual-studio-code"
         ];
         brews = [
@@ -69,7 +78,7 @@
           "TheUnarchiver" = 425424353;
           "Unread" = 1363637349;
           "WiFiMan" = 1385561119;
-          "Wipr" = 1320666476;
+          "Wipr2" = 1662217862;
           "WireGuard" = 1451685025;
           "Xcode" = 497799835;
         };
@@ -85,6 +94,8 @@
       # Necessary for using flakes on this system.
       nix.settings.experimental-features = "nix-command flakes";
 
+      # Defaults
+      security.pam.enableSudoTouchIdAuth = true;
       system.defaults = {
         dock.autohide = true;
         trackpad.Clicking = true;
@@ -100,6 +111,12 @@
 
       # The platform the configuration will be used on.
       nixpkgs.hostPlatform = "aarch64-darwin";
+      programs.zsh.enable = true;
+      
+      # Home Manager
+      users.users.smparkin.home = "/Users/smparkin";
+      nix.configureBuildUsers = true;
+      nix.useDaemon = true;
     };
   in
   {
@@ -114,13 +131,39 @@
             enable = true;
             enableRosetta = true;
             user = "smparkin";
-            autoMigrate = true;
+          };
+        }
+        home-manager.darwinModules.home-manager
+        {
+          home-manager = {
+            useGlobalPkgs = true;
+            useUserPackages = true;
+            users.smparkin = import ./home.nix;
           };
         }
       ];
     };
 
-    # Expose the package set, including overlays, for convenience.
-    darwinPackages = self.darwinConfigurations."macbook".pkgs;
+    darwinConfigurations."workbook" = nix-darwin.lib.darwinSystem {
+      modules = [
+        configuration
+        nix-homebrew.darwinModules.nix-homebrew
+        {
+          nix-homebrew = {
+            enable = true;
+            enableRosetta = true;
+            user = "parkist";
+          };
+        }
+        home-manager.darwinModules.home-manager
+        {
+          home-manager = {
+            useGlobalPkgs = true;
+            useUserPackages = true;
+            users.parkist = import ./work.nix;
+          };
+        }
+      ];
+    };
   };
 }
