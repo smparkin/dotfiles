@@ -18,74 +18,9 @@
 
       # List packages installed in system profile. To search by name, run:
       # $ nix-env -qaP | grep wget
-      environment.systemPackages =
-        [
-            pkgs.fastfetch
-            pkgs.coreutils
-            pkgs.nmap
-            pkgs.openjdk17
-            pkgs.openjdk21
-            pkgs.tree
-            pkgs.zstd
-            # zsh plugins
-            pkgs.zsh-autosuggestions
-            pkgs.zsh-syntax-highlighting
-        ];
-
-      homebrew = {
-        enable = true;
-        casks = [
-          "appcleaner"
-          "balenaetcher"
-          "bambu-studio"
-          "daisydisk"
-          "discord"
-          "docker"
-          "firefox"
-          "font-sf-mono"
-          "iina"
-          "istat-menus"
-          "iterm2"
-          "obsidian"
-          "ollama"
-          "prismlauncher"
-          "protonvpn"
-          "qbittorrent"
-          "raspberry-pi-imager"
-          "raycast"
-          "rectangle"
-          "scroll-reverser"
-          "sf-symbols"
-          "steam"
-          "utm"
-          "visual-studio-code"
-        ];
-        brews = [
-          "mas"
-        ];
-        masApps = {
-          "Broadcasts" = 1469995354;
-          "Callsheet" = 1672356376;
-          "Developer" = 640199958;
-          "Flighty" = 1358823008;
-          "Infuse" = 1136220934;
-          "Noir" = 1592917505;
-          "Numbers" = 409203825;
-          "Overcast" = 888422857;
-          "Pages" = 409201541;
-          "SponsorBlock" = 1573461917;
-          "TestFlight" = 899247664;
-          "TheUnarchiver" = 425424353;
-          "Unread" = 1363637349;
-          "WiFiMan" = 1385561119;
-          "Wipr2" = 1662217862;
-          "WireGuard" = 1451685025;
-          "Xcode" = 497799835;
-        };
-        onActivation.cleanup = "zap";
-        onActivation.autoUpdate = true;
-        onActivation.upgrade = true;
-      };
+      environment.systemPackages = [
+        pkgs.vim
+      ];
 
       # Auto upgrade nix package and the daemon service.
       services.nix-daemon.enable = true;
@@ -123,13 +58,62 @@
     };
   in
   {
-    # Build darwin flake using:
-    # $ darwin-rebuild build --flake .#simple
     darwinConfigurations."macbook" = nix-darwin.lib.darwinSystem {
       modules = [
         configuration
         nix-homebrew.darwinModules.nix-homebrew
         {
+          homebrew = {
+            enable = true;
+            casks = [
+              "appcleaner"
+              "balenaetcher"
+              "bambu-studio"
+              "daisydisk"
+              "discord"
+              "docker"
+              "firefox"
+              "font-sf-mono"
+              "iina"
+              "istat-menus"
+              "iterm2"
+              "obsidian"
+              "ollama"
+              "prismlauncher"
+              "protonvpn"
+              "qbittorrent"
+              "raspberry-pi-imager"
+              "raycast"
+              "rectangle"
+              "scroll-reverser"
+              "sf-symbols"
+              "steam"
+              "utm"
+              "visual-studio-code"
+            ];
+            masApps = {
+              "Broadcasts" = 1469995354;
+              "Callsheet" = 1672356376;
+              "Developer" = 640199958;
+              "Flighty" = 1358823008;
+              "Infuse" = 1136220934;
+              "Noir" = 1592917505;
+              "Numbers" = 409203825;
+              "Overcast" = 888422857;
+              "Pages" = 409201541;
+              "SponsorBlock" = 1573461917;
+              "TestFlight" = 899247664;
+              "TheUnarchiver" = 425424353;
+              "Unread" = 1363637349;
+              "WiFiMan" = 1385561119;
+              "Wipr2" = 1662217862;
+              "WireGuard" = 1451685025;
+              "Xcode" = 497799835;
+            };
+            onActivation.cleanup = "zap";
+            onActivation.autoUpdate = true;
+            onActivation.upgrade = true;
+          };
           nix-homebrew = {
             enable = true;
             enableRosetta = true;
@@ -152,6 +136,27 @@
         configuration
         nix-homebrew.darwinModules.nix-homebrew
         {
+          homebrew = {
+            enable = true;
+            casks = [
+              "appcleaner"
+              "balenaetcher"
+              "daisydisk"
+              "firefox"
+              "font-sf-mono"
+              "iina"
+              "istat-menus"
+              "iterm2"
+              "obsidian"
+              "raycast"
+              "rectangle"
+              "scroll-reverser"
+              "visual-studio-code"
+            ];
+            onActivation.cleanup = "zap";
+            onActivation.autoUpdate = true;
+            onActivation.upgrade = true;
+          };
           nix-homebrew = {
             enable = true;
             enableRosetta = true;

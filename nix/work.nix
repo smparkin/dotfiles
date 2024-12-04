@@ -6,6 +6,17 @@
   home.username = "parkist";
   home.homeDirectory = "/Users/parkist";
 
+  # nix packages
+  home.packages = [
+    pkgs.fastfetch
+    pkgs.coreutils
+    pkgs.nmap
+    pkgs.tree
+    # zsh plugins
+    pkgs.zsh-autosuggestions
+    pkgs.zsh-syntax-highlighting
+  ];
+
   # This value determines the Home Manager release that your
   # configuration is compatible with. This helps avoid breakage
   # when a new Home Manager release introduces backwards
