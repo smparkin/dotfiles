@@ -38,7 +38,7 @@ fi
 touch ~/.hushlogin
 
 # remove common files and symlink new files
-rm ~/.zshrc ~/.vimrc ~/.tmux.conf
+rm -r ~/.zshrc ~/.vimrc ~/.tmux.conf ~/.zsh.d ~/.gitconfig ~/.gitignore_global
 mkdir ~/.zsh.d
 ln -s ~/dotfiles/zsh/aliases ~/.zsh.d/aliases
 ln -s ~/dotfiles/zsh/functions ~/.zsh.d/functions
