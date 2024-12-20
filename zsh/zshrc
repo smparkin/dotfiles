@@ -57,20 +57,12 @@ else
     alias ls='ls -G'
 fi
 
-shownetinfo
-if [ "$OSTYPE" = "Linux" ]; then
-    echo ""
-elif [ "$OSTYPE" = "Darwin" ]; then
+if [ "$(uname)" = "Darwin" ]; then
     # set up iterm integration
     source ~/.iterm2_shell_integration.zsh
-    # set up auto suggestions and syntax highlighting
-    source /nix/store/*zsh-autosuggestions*/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-    source /nix/store/*zsh-syntax-highlighting*/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-    ssh-add -K ~/.ssh/id_rsa 2>/dev/null
-    LAPTOP=$(system_profiler SPHardwareDataType | grep "Model Name" | grep "Book")
-    if [ "$LAPTOP" != "" ]; then
-        batt
-    else
-        echo ""
-    fi
+    # source homebrew
+    eval "$(/opt/homebrew/bin/brew shellenv)"
+    # plugins
+    source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+    source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 fi
