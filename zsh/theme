@@ -13,7 +13,7 @@ git_branch_info() {
             \#' 'branch.ab' '*) 
                 local -a counts=("${(s: :)line}")
                 [[ ${counts[3]#+} -gt 0 ]] && status_indicators+="%B%F{magenta}↑%f%b"
-                [[ ${counts[4]#+} -gt 0 ]] && status_indicators+="%B%F{green}↓%f%b"
+                [[ ${counts[4]#-} -gt 0 ]] && status_indicators+="%B%F{green}↓%f%b"
                 ;;
             '?'*) ((untracked)) || { untracked=1; status_indicators+="%B%F{white}●%f%b" } ;;
             'u'*) ((unmerged)) || { unmerged=1; status_indicators+="%B%F{red}✕%f%b" } ;;
