@@ -5,7 +5,7 @@
 	required = true
 [user]
 	name = Stephen Parkinson
-	email = smp827@gmail.com
+	email = stephen@smpark.in
 [core]
 	excludesfile = ~/.gitignore_global
 [pull]
