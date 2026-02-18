@@ -19,26 +19,37 @@ if [ "$OSTYPE" = "Linux" ]; then
         echo "Unknown package manager, continuing..."
     fi
 elif [ "$OSTYPE" = "Darwin" ]; then
-    mkdir ~/Developer
+    mkdir -p ~/Developer
     echo "Install Homebrew? [y/n]"
     read homebrew
     if [ "$homebrew" = "y" ]; then
-	/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
         echo "Restore from Brewfile? [y/n]"
         read bundle
         if [ "$bundle" = "y" ]; then
-            brew bundle install --file=
+            brew bundle install
         else
-            brew install coreutils fastfetch vim zsh jq python3 zsh-autosuggestions zsh-syntax-highlighting
+            brew install coreutils fastfetch vim zsh jq python3
         fi
     fi
+fi
+
+# Clone zsh plugins
+PLUGIN_DIR="$HOME/.zsh/plugins"
+mkdir -p "$PLUGIN_DIR"
+if [ ! -d "$PLUGIN_DIR/zsh-autosuggestions" ]; then
+    git clone --depth=1 https://github.com/zsh-users/zsh-autosuggestions "$PLUGIN_DIR/zsh-autosuggestions"
+fi
+if [ ! -d "$PLUGIN_DIR/zsh-syntax-highlighting" ]; then
+    git clone --depth=1 https://github.com/zsh-users/zsh-syntax-highlighting "$PLUGIN_DIR/zsh-syntax-highlighting"
 fi
 
 # silence login message
 touch ~/.hushlogin
 
 # remove common files and symlink new files
-rm -r ~/.zshrc ~/.vimrc ~/.tmux.conf ~/.zsh.d ~/.gitconfig ~/.gitignore_global
+rm -f ~/.zshrc ~/.vimrc ~/.tmux.conf ~/.gitconfig ~/.gitignore_global
+rm -rf ~/.zsh.d
 mkdir ~/.zsh.d
 ln -s ~/dotfiles/zsh/aliases ~/.zsh.d/aliases
 ln -s ~/dotfiles/zsh/functions ~/.zsh.d/functions

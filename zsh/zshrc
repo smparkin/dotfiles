@@ -60,16 +60,14 @@ fi
 
 if [ "$(uname)" = "Darwin" ]; then
     # set up iterm integration
-    source ~/.iterm2_shell_integration.zsh
+    [[ -f ~/.iterm2_shell_integration.zsh ]] && source ~/.iterm2_shell_integration.zsh
     # source homebrew
     eval "$(/opt/homebrew/bin/brew shellenv)"
-    # plugins
-    source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-    source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 fi
 
-# Added by LM Studio CLI (lms)
-export PATH="$PATH:/Users/smparkin/.cache/lm-studio/bin"
-
-# Created by `pipx` on 2025-02-08 01:15:05
-export PATH="$PATH:/Users/smparkin/.local/bin"
+# Plugins (cloned into ~/.zsh/plugins by setup.sh)
+PLUGIN_DIR="$HOME/.zsh/plugins"
+[[ -f "$PLUGIN_DIR/zsh-autosuggestions/zsh-autosuggestions.zsh" ]] && \
+    source "$PLUGIN_DIR/zsh-autosuggestions/zsh-autosuggestions.zsh"
+[[ -f "$PLUGIN_DIR/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ]] && \
+    source "$PLUGIN_DIR/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
