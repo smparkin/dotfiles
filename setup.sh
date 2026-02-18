@@ -1,36 +1,19 @@
 #! /bin/bash
 
-OSTYPE=$(uname -s)
-
-if [ "$OSTYPE" = "Linux" ]; then
-    echo "Package manager: "
-    read packm
-    if [ "$packm" = "apt" ]; then
-        sudo apt update
-        sudo apt install coreutils vim zsh jq python3 -y
-        sudo apt upgrade -y
-    elif [ "$packm" = "yum" ]; then
-        sudo yum update
-        sudo yum install coreutils vim zsh jq python3 -y
-    elif [ "$packm" = "pacman" ]; then
-        sudo pacman -Syu
-        sudo pacman -Sy coreutils vim zsh jq python3
+echo "Install Homebrew? [y/n]"
+read homebrew
+if [ "$homebrew" = "y" ]; then
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    echo "Restore from Brewfile? [y/n]"
+    read bundle
+    if [ "$bundle" = "y" ]; then
+        echo "Available Brewfiles:"
+        ls ~/dotfiles/brew/
+        echo "Brewfile name: "
+        read brewfile
+        brew bundle install --file=~/dotfiles/brew/"$brewfile"
     else
-        echo "Unknown package manager, continuing..."
-    fi
-elif [ "$OSTYPE" = "Darwin" ]; then
-    mkdir -p ~/Developer
-    echo "Install Homebrew? [y/n]"
-    read homebrew
-    if [ "$homebrew" = "y" ]; then
-        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-        echo "Restore from Brewfile? [y/n]"
-        read bundle
-        if [ "$bundle" = "y" ]; then
-            brew bundle install
-        else
-            brew install coreutils fastfetch vim zsh jq python3
-        fi
+        brew install coreutils fastfetch vim zsh jq python3
     fi
 fi
 
@@ -59,6 +42,8 @@ ln -s ~/dotfiles/git/gitconfig ~/.gitconfig
 ln -s ~/dotfiles/git/gitignore_global ~/.gitignore_global
 ln -s ~/dotfiles/tmux/tmux.conf ~/.tmux.conf
 ln -s ~/dotfiles/vim/vimrc ~/.vimrc
+
+mkdir -p ~/Developer
 
 echo "Change shell to zsh? [y/n]"
 read shell
