@@ -3,7 +3,7 @@ alias ll='ls -lah'
 alias l='ls -CF'
 
 # System Utils
-alias brewup='cl && brew update && brew upgrade && brew upgrade --cask && brew cleanup -s && brew doctor --verbose | grep -A 1 --color=never "Homebrew Version" && brew autoremove'
+alias brewup='cl && brew update && brew upgrade && brew upgrade --cask && brew cleanup -s && brew doctor --verbose | grep -A 1 --color=never "Homebrew Version" && brew autoremove && { command -v haproxy &>/dev/null && sudo codesign --force --sign - $(which haproxy) && sudo /usr/libexec/ApplicationFirewall/socketfilterfw --add $(which haproxy) && sudo /usr/libexec/ApplicationFirewall/socketfilterfw --unblock $(which haproxy) || true; }'
 alias cl='clear'
 alias wthr='curl wttr.in/san_luis_obispo'
 alias nf='cl && fastfetch && shownetinfo && batt'
