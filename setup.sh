@@ -45,9 +45,11 @@ ln -s ~/dotfiles/vim/vimrc ~/.vimrc
 
 mkdir -p ~/Developer
 
-echo "Change shell to zsh? [y/n]"
-read shell
-if [ "$shell" = "y" ]; then
-    chsh -s /bin/zsh
+if command -v chsh &>/dev/null && command -v zsh &>/dev/null; then
+    echo "Change shell to zsh? [y/n]"
+    read shell
+    if [ "$shell" = "y" ]; then
+        chsh -s "$(command -v zsh)"
+    fi
 fi
 exit
