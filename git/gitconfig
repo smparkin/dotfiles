@@ -6,7 +6,14 @@
 [user]
 	name = Stephen Parkinson
 	email = stephen@smpark.in
+	signingkey = ~/.ssh/id_ed25519.pub
 [core]
 	excludesfile = ~/.gitignore_global
 [pull]
 	rebase = false
+[gpg]
+	format = ssh
+[commit]
+	gpgsign = true
+[tag]
+	gpgsign = true
