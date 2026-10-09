@@ -1,0 +1,7 @@
+brew "coreutils"
+brew "fastfetch"
+brew "git-lfs"
+brew "jq"
+brew "python3"
+brew "vim"
+brew "zsh"

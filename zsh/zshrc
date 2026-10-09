@@ -1,3 +1,6 @@
+# Keep PATH entries unique, even when re-sourced
+typeset -U path PATH
+
 # Get basic stuff out of the way
 source ~/.zsh.d/theme
 source ~/.zsh.d/functions

@@ -3,10 +3,10 @@ alias ll='ls -lah'
 alias l='ls -CF'
 
 # System Utils
-alias brewup='cl && brew update && brew upgrade && brew upgrade --cask && brew cleanup -s && brew doctor --verbose | grep -A 1 --color=never "Homebrew Version" && brew autoremove'
+alias brewup='cl && brew update && brew upgrade && brew cleanup -s && brew doctor --verbose | grep -A 1 --color=never "Homebrew Version" && brew autoremove'
 alias cl='clear'
-alias wthr='curl wttr.in/san_luis_obispo'
-alias nf='cl && fastfetch && shownetinfo && batt'
+alias wthr='curl https://wttr.in/san_luis_obispo'
+alias nf='cl && fastfetch && shownetinfo'
 alias src='source ~/.zshrc'
 
 alias fps='if [[ $(launchctl getenv MTL_HUD_ENABLED) -eq 1 ]]; then

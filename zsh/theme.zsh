@@ -1,5 +1,15 @@
 git_branch_info() {
-	local git_status_full=$(git status --porcelain=v2 --branch -z 2>/dev/null)
+	# This runs in every repo you cd into, including ones whose .git came from an
+	# archive or shared drive. A repo's own config and hooks can make `git status`
+	# run commands (fsmonitor, post-index-change, filter drivers), so disable the
+	# first two and skip status entirely if the repo defines its own filters.
+	local -a git=(git -c core.fsmonitor=false -c core.hooksPath=/dev/null --no-optional-locks)
+	local git_status_full
+	if "${git[@]}" config --show-scope --get-regexp '^filter\.' 2>/dev/null | grep -qvE '^(system|global)[[:space:]]'; then
+		git_status_full="# branch.head $("${git[@]}" symbolic-ref --short -q HEAD)"
+	else
+		git_status_full=$("${git[@]}" status --porcelain=v2 --branch --ignore-submodules -z 2>/dev/null)
+	fi
 	[[ -n "$git_status_full" ]] || return
 
 	local branch=""
@@ -39,18 +49,19 @@ git_branch_info() {
 		esac
 	done
 
-	[[ -n "$branch" ]] && echo " %B%F{white}‹ %B%F{yellow}${branch}%f${status_indicators:+ $status_indicators}%B%F{white}%f ›"
+	[[ -n "$branch" ]] && echo " %B%F{white}‹ %B%F{yellow}${(V)branch//\%/%%}%f${status_indicators:+ $status_indicators}%B%F{white}%f ›"
 }
 
 local CACHED_PWD=""
 local CACHED_SHORT_PWD=""
+# Sets CACHED_SHORT_PWD rather than echoing, so it must not be called in $(...)
+# or the cache is lost with the subshell.
 shrink_path() {
 	if [[ $CACHED_PWD != $PWD ]]; then
 		CACHED_PWD=$PWD
 		local directory=${PWD/#$HOME/\~}
 		if [[ $directory == '~' || $directory == '/' ]]; then
 			CACHED_SHORT_PWD=$directory
-			echo $CACHED_SHORT_PWD
 			return
 		fi
 		local parts=("${(@s:/:)directory}")
@@ -65,7 +76,6 @@ shrink_path() {
 		output+=$parts[-1]
 		CACHED_SHORT_PWD=${(j:/:)output}
 	fi
-	echo $CACHED_SHORT_PWD
 }
 
 # SSH connection indicator
@@ -105,10 +115,13 @@ precmd() {
 		local right="took $_cmd_duration"
 		printf "\e[%dG\e[38;5;245m%s\e[0m\r" $((COLUMNS - ${#right})) "$right"
 	fi
-	print -P "$(ssh_connection)%B%F{green}%n@%m%f%b$(git_branch_info) %f%b: $(shrink_path)"
+	# Branch and directory names are untrusted: print -P must not run $(...) in them
+	# (no_prompt_subst), and (V) / %% stop control characters and prompt escapes.
+	setopt localoptions no_prompt_subst
+	shrink_path
+	print -P "$(ssh_connection)%B%F{green}%n@%m%f%b$(git_branch_info) %f%b: ${(V)CACHED_SHORT_PWD//\%/%%}"
 }
 
 # Prompt configuration — first info line is printed by precmd above
 PROMPT='[%(?:%B%F{green}%?%f%b:%B%F{red}%?%f%b)]  '
 RPROMPT=''
-setopt PROMPT_SUBST
