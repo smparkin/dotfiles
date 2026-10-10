@@ -1,6 +1,11 @@
 # Keep PATH entries unique, even when re-sourced
 typeset -U path PATH
 
+# Homebrew, before compinit below so its completions get picked up
+if [[ -x /opt/homebrew/bin/brew ]]; then
+	eval "$(/opt/homebrew/bin/brew shellenv)"
+fi
+
 # Get basic stuff out of the way
 source ~/.zsh.d/theme
 source ~/.zsh.d/functions
@@ -66,18 +71,15 @@ if [ "$(uname)" = "Darwin" ]; then
 	[[ -f ~/.iterm2_shell_integration.zsh ]] && source ~/.iterm2_shell_integration.zsh
 fi
 
-# Homebrew (macOS: /opt/homebrew, Linux: /home/linuxbrew/.linuxbrew)
-if [[ -x /opt/homebrew/bin/brew ]]; then
-	eval "$(/opt/homebrew/bin/brew shellenv)"
-elif [[ -x /home/linuxbrew/.linuxbrew/bin/brew ]]; then
-	eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-fi
-
-# Plugins (cloned into ~/.zsh/plugins by setup.sh)
-PLUGIN_DIR="$HOME/.zsh/plugins"
-[[ -f "$PLUGIN_DIR/zsh-autosuggestions/zsh-autosuggestions.zsh" ]] &&
-	source "$PLUGIN_DIR/zsh-autosuggestions/zsh-autosuggestions.zsh"
-[[ -f "$PLUGIN_DIR/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ]] &&
-	source "$PLUGIN_DIR/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+# Plugins, from Homebrew or apt (see setup.sh). Syntax highlighting has to load last.
+for plugin in zsh-autosuggestions zsh-syntax-highlighting; do
+	for dir in ${HOMEBREW_PREFIX:+$HOMEBREW_PREFIX/share} /usr/share; do
+		if [[ -f $dir/$plugin/$plugin.zsh ]]; then
+			source "$dir/$plugin/$plugin.zsh"
+			break
+		fi
+	done
+done
+unset plugin dir
 
 export PATH="$PATH:/usr/sbin"

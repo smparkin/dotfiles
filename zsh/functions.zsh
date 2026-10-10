@@ -29,3 +29,14 @@ function shownetinfo() {
 	echo
 	tput sgr0
 }
+
+# Update Homebrew packages, then list anything installed that this host's
+# Brewfile doesn't have, so it can be added there or uninstalled
+function brewup() {
+	clear
+	brew update && brew upgrade && brew cleanup -s && brew autoremove || return
+	brew doctor --verbose | grep -A 1 --color=never "Homebrew Version"
+	local brewfile=~/dotfiles/brew/$(hostname -s)
+	[[ -f $brewfile ]] || brewfile=~/dotfiles/brew/base
+	brew bundle cleanup --file="$brewfile"
+}

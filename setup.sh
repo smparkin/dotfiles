@@ -2,12 +2,14 @@
 # Safe to re-run: every step checks the current state and only acts (or asks)
 # when something is missing.
 #
-# Brewfile: brew/$(hostname -s) if it exists, otherwise brew/base.
-# Override with e.g. `BREWFILE=italica ./setup.sh`.
+# Packages: Homebrew on macOS, from brew/$(hostname -s) if it exists, otherwise
+# brew/base (override with e.g. `BREWFILE=italica ./setup.sh`); apt on Debian,
+# from apt/base.
 set -euo pipefail
 
 DOTFILES="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 BACKUP_DIR="$HOME/.dotfiles-backup/$(date +%Y%m%d-%H%M%S)"
+OS="$(uname -s)"
 
 ask() {
 	local reply
@@ -37,47 +39,66 @@ link() {
 load_brew() {
 	if [[ -x /opt/homebrew/bin/brew ]]; then
 		eval "$(/opt/homebrew/bin/brew shellenv)"
-	elif [[ -x /home/linuxbrew/.linuxbrew/bin/brew ]]; then
-		eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 	fi
 	command -v brew &>/dev/null
 }
 
 login_shell() {
-	if [[ $(uname -s) == Darwin ]]; then
+	if [[ $OS == Darwin ]]; then
 		dscl . -read "/Users/$(id -un)" UserShell | awk '{print $2}'
 	else
 		getent passwd "$(id -un)" | cut -d: -f7
 	fi
 }
 
-# Homebrew
-if ! load_brew && ask "Install Homebrew?"; then
-	/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-	load_brew
-fi
+if [[ $OS == Darwin ]]; then
+	if ! load_brew && ask "Install Homebrew?"; then
+		/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+		load_brew
+	fi
 
-if command -v brew &>/dev/null; then
-	brewfile="$DOTFILES/brew/${BREWFILE:-$(hostname -s)}"
-	if [[ ! -f $brewfile ]]; then
-		if [[ -n ${BREWFILE:-} ]]; then
-			echo "No such Brewfile: $brewfile" >&2
-			exit 1
+	if command -v brew &>/dev/null; then
+		brewfile="$DOTFILES/brew/${BREWFILE:-$(hostname -s)}"
+		if [[ ! -f $brewfile ]]; then
+			if [[ -n ${BREWFILE:-} ]]; then
+				echo "No such Brewfile: $brewfile" >&2
+				exit 1
+			fi
+			brewfile="$DOTFILES/brew/base"
 		fi
-		brewfile="$DOTFILES/brew/base"
+		if brew bundle check --no-upgrade --file="$brewfile" &>/dev/null; then
+			echo "Brewfile brew/${brewfile##*/} is satisfied"
+		elif ask "Install missing packages from brew/${brewfile##*/}?"; then
+			brew bundle install --no-upgrade --file="$brewfile"
+		fi
 	fi
-	if brew bundle check --no-upgrade --file="$brewfile" &>/dev/null; then
-		echo "Brewfile brew/${brewfile##*/} is satisfied"
-	elif ask "Install missing packages from brew/${brewfile##*/}?"; then
-		brew bundle install --no-upgrade --file="$brewfile"
+elif command -v apt-get &>/dev/null; then
+	missing=()
+	while read -r pkg; do
+		# dpkg-query's own ${...} format, not a shell expansion
+		# shellcheck disable=SC2016
+		if [[ $(dpkg-query -W -f='${db:Status-Abbrev}' "$pkg" 2>/dev/null) != ii* ]]; then
+			missing+=("$pkg")
+		fi
+	done < <(grep -vE '^(#|$)' "$DOTFILES/apt/base")
+	if ((${#missing[@]} == 0)); then
+		echo "apt/base is satisfied"
+	elif ask "Install ${missing[*]} with apt?"; then
+		sudo apt-get update
+		sudo apt-get install -y "${missing[@]}"
 	fi
 fi
 
-# Clone zsh plugins
-for repo in zsh-users/zsh-autosuggestions zsh-users/zsh-syntax-highlighting; do
-	dir="$HOME/.zsh/plugins/${repo#*/}"
-	[[ -d $dir ]] || git clone --depth=1 "https://github.com/$repo" "$dir"
+# zsh plugins come from Homebrew or apt now. Remove the git clones an older
+# version of this script made, once the packaged copy is there.
+for plugin in zsh-autosuggestions zsh-syntax-highlighting; do
+	clone="$HOME/.zsh/plugins/$plugin"
+	if [[ -d $clone/.git && (-f ${HOMEBREW_PREFIX:-/opt/homebrew}/share/$plugin/$plugin.zsh || -f /usr/share/$plugin/$plugin.zsh) ]]; then
+		rm -rf "$clone"
+		echo "Removed $clone (now from a package)"
+	fi
 done
+rmdir "$HOME/.zsh/plugins" "$HOME/.zsh" 2>/dev/null || true
 
 # silence login message
 [[ -e $HOME/.hushlogin ]] || touch "$HOME/.hushlogin"
@@ -93,11 +114,12 @@ link vim/vimrc "$HOME/.vimrc"
 
 mkdir -p "$HOME/Developer"
 
-if command -v chsh &>/dev/null && command -v zsh &>/dev/null; then
-	zsh_path="$(command -v zsh)"
-	if [[ $(login_shell) != "$zsh_path" ]] && ask "Change login shell to $zsh_path?"; then
-		# chsh refuses shells that aren't listed in /etc/shells (e.g. Homebrew's zsh)
-		grep -qxF "$zsh_path" /etc/shells || echo "$zsh_path" | sudo tee -a /etc/shells >/dev/null
-		chsh -s "$zsh_path"
-	fi
+# The OS's own zsh: macOS ships one, and Debian's comes from apt/base
+if [[ $OS == Darwin ]]; then
+	zsh_path=/bin/zsh
+else
+	zsh_path=/usr/bin/zsh
+fi
+if [[ -x $zsh_path && $(login_shell) != "$zsh_path" ]] && ask "Change login shell to $zsh_path?"; then
+	chsh -s "$zsh_path"
 fi

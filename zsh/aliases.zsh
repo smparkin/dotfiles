@@ -3,7 +3,6 @@ alias ll='ls -lah'
 alias l='ls -CF'
 
 # System Utils
-alias brewup='cl && brew update && brew upgrade && brew cleanup -s && brew doctor --verbose | grep -A 1 --color=never "Homebrew Version" && brew autoremove'
 alias cl='clear'
 alias wthr='curl https://wttr.in/san_luis_obispo'
 alias nf='cl && fastfetch && shownetinfo'

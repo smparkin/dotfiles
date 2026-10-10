@@ -17,3 +17,8 @@
 	gpgsign = true
 [tag]
 	gpgsign = true
+# Per-machine overrides that stay out of this repo, such as a work email. Set
+# them with `git config --file ~/.gitconfig.local ...`: `git config --global`
+# would write into this file through the symlink.
+[include]
+	path = ~/.gitconfig.local
