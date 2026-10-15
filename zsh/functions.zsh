@@ -40,3 +40,10 @@ function brewup() {
 	[[ -f $brewfile ]] || brewfile=~/dotfiles/brew/base
 	brew bundle cleanup --file="$brewfile"
 }
+
+# Update apt packages. Unlike brewup there's no per-host list to check
+# against, so whatever is installed stays installed.
+function aptup() {
+	clear
+	sudo apt update && sudo apt full-upgrade && sudo apt autoremove && sudo apt clean
+}
